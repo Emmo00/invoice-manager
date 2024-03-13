@@ -19,7 +19,11 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $filter = CustomerFilter::transform($request);
-        return CustomerResource::collection(Customer::where($filter)->paginate()->appends($request->query()));
+        $customers = Customer::where($filter);
+        if ($request->query('includeInvoices')) {
+            $customers = $customers->with('invoices');
+        }
+        return CustomerResource::collection($customers->paginate()->appends($request->query()));
     }
 
     /**
