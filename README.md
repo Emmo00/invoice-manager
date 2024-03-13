@@ -13,6 +13,7 @@ Invoice Management API with Laravel
 - city
 - state
 - postal code
+- country
 
 ### Invoice
 
