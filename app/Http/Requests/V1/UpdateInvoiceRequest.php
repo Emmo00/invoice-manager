@@ -12,7 +12,7 @@ class UpdateInvoiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return request()->user()->tokenCan('update');
     }
 
     /**
