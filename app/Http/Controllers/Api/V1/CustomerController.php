@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\V1\BulkStoreCustomerRequest;
 use App\Models\Customer;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\CustomerResource;
@@ -35,6 +36,20 @@ class CustomerController extends Controller
             "email" => "unique:customers"
         ]);
         return new CustomerResource(Customer::create($request->all()));
+    }
+
+    /**
+     * Bulk store customers
+     */
+    public function bulkStore(BulkStoreCustomerRequest $request)
+    {
+        $data = array_map(function ($obj) {
+            if (isset ($obj['postalCode'])) {
+                unset ($obj['postalCode']);
+            }
+            return $obj;
+        }, $request->all());
+        Customer::insert($data);
     }
 
     /**

@@ -27,14 +27,14 @@ class UpdateInvoiceRequest extends FormRequest
                 "customerId" => ["required"],
                 "amount" => ["required", "integer"],
                 "status" => ["required", Rule::in(['V', 'B', 'P'])],
-                "billed_date" => ["required"],
+                "billedDate" => ["required"],
             ];
         } else {
             return [
                 "customerId" => ["sometimes", "required"],
                 "amount" => ["sometimes", "required", "integer"],
                 "status" => ["sometimes", "required", Rule::in(['V', 'B', 'P'])],
-                "billed_date" => ["sometimes", "required"],
+                "billedDate" => ["sometimes", "required"],
             ];
         }
     }

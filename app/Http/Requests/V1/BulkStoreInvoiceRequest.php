@@ -5,7 +5,7 @@ namespace App\Http\Requests\V1;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreInvoiceRequest extends FormRequest
+class BulkStoreInvoiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,19 +23,25 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "customerId" => ["required"],
-            "amount" => ["required", "integer"],
-            "status" => ["required", Rule::in(['V', 'B', 'P'])],
-            "billedDate" => ["required"],
+            "*.customerId" => ["required"],
+            "*.amount" => ["required", "integer"],
+            "*.status" => ["required", Rule::in(['V', 'B', 'P'])],
+            "*.billedDate" => ["required"],
         ];
     }
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            "customer_id" => $this->customerId,
-            "billed_date" => $this->billedDate,
-            "paid_date" => $this->paidDate,
-        ]);
+        $data = [];
+
+        foreach ($this->all() as $obj) {
+            $obj['customer_id'] = $obj['customerId'] ?? null;
+            $obj['billed_date'] = $obj['billedDate'] ?? null;
+            $obj['paid_date'] = $obj['paidDate'] ?? null;
+
+            $data[] = $obj;
+        }
+
+        $this->merge($data);
     }
 }
