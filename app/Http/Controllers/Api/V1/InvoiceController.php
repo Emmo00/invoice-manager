@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\V1\BulkStoreInvoiceRequest;
+use App\Http\Requests\V1\DeleteInvoiceRequest;
 use App\Models\Invoice;
 use App\Http\Requests\V1\StoreInvoiceRequest;
 use App\Http\Requests\V1\UpdateInvoiceRequest;
@@ -78,8 +79,8 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(DeleteInvoiceRequest $request, Invoice $invoice)
     {
-        //
+        $invoice->delete();
     }
 }
