@@ -36,14 +36,19 @@ PATCH   /api/v1/customers/:id   Update customer
 PUT     /api/v1/customers/:id   Update customer's data
 PATCH   /api/v1/invoices/:id    Update invoice
 PUT     /api/v1/invoices/:id    Update invoice's data
+DELETE  /api/v1/customers/:id   Delete customer
+DELETE  /api/v1/invoices/:id   Delete invoice
+GET     /api/keys               Get Auth tokens
 ```
 
 ## Features
 
-- [] Filter response with query string
+- [x] Filter response with query string
 
-- [] Include related data in response(with query string)
+- [x] Include related data in response(with query string)
 
-- [] Bulk create invoices
+- [x] Bulk create customers
 
-- [] Authorize operations with tokens
+- [x] Bulk create invoices
+
+- [x] Authorize operations with tokens
