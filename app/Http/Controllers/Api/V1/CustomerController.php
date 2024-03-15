@@ -9,7 +9,6 @@ use App\Filters\V1\CustomerFilter;
 use App\Http\Requests\V1\StoreCustomerRequest;
 use App\Http\Requests\V1\UpdateCustomerRequest;
 
-use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -51,7 +50,7 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
     }
 
     /**
